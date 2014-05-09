@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<canvas id="p" width="400" height="300"></canvas>
+<script>
+var c = document.getElementById('p').getContext('2d');
+var angle = 0.5;
+var branchScale = 0.75;
+var l = 60;
+var minL = 5;
+var w = c.canvas.width;
+var h = c.canvas.height;
+c.translate(w/2, h);
+drawBranch(l, 0);
+function drawBranch(l, direction) {
+  c.save();
+  var a = angle * Math.random();
+  c.rotate(a * direction);
+  c.fillRect(-l / 20, 0, l / 10, -l);
+  if (l > minL) {
+    c.translate(0, -l);
+    var b = 0.2 * (Math.random() - 0.5);
+    b = b + 1;
+    drawBranch(l * b * branchScale, -1);
+    b = 1 + 0.2 * (Math.random() - 0.5);
+    drawBranch(l * b * branchScale, 1);
+  }
+  c.restore();
+}
+</script>
+
+</body>
+</html>
